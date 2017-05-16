@@ -1,14 +1,13 @@
 with import <nixpkgs> {};
 
 stdenv.mkDerivation {
-  name = "mc-4.8.12";
+  name = "watch-stl";
 
   src = ./.;
 
   buildInputs = [
     xlibs.libX11 xorg.libXcursor xorg.libXrandr xorg.libXinerama mesa mesa_glu
     xorg.libXi
-    # glfw xlibs.libICE
   ];
 
   meta = {

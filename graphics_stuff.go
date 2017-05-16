@@ -23,7 +23,7 @@ func init() {
 	runtime.LockOSThread()
 }
 
-func main() {
+func show_object(cubeVertices []float32) {
 	if err := glfw.Init(); err != nil {
 		log.Fatalln("failed to initialize glfw:", err)
 	}
@@ -110,6 +110,7 @@ func main() {
 
 		angle += elapsed
 		model = mgl32.HomogRotate3D(float32(angle), mgl32.Vec3{0, 1, 0})
+		model = model.Mul4(mgl32.Scale3D(0.01, 0.01, 0.01))
 
 		// Render
 		gl.UseProgram(program)
@@ -117,7 +118,8 @@ func main() {
 
 		gl.BindVertexArray(vao)
 
-		gl.DrawArrays(gl.TRIANGLES, 0, 6*2*3)
+		gl.DrawArrays(gl.TRIANGLES, 0, int32(len(cubeVertices)/6))
+		// gl.DrawArrays(gl.TRIANGLES, 0, 6*2*3)
 
 		// Maintenance
 		window.SwapBuffers()
